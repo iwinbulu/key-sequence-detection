@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Key Detection</title>
+    <script type="text/javascript" src="./cornify.js"></script>
+  </head>
+  <body>
+    <script>
+      // Keep track of pressed keys:
+      const pressed = []; // Create an empty array pressed to store the pressed keys.
+      const secretCode = "iwin";
+
+      window.addEventListener("keyup", (e) => {
+        // Every time a key is released, add it to the pressed array.
+        console.log(e.key);
+        pressed.push(e.key);
+        // Limit the stored keys:
+        pressed.splice(
+          -secretCode.length - 1,
+          pressed.length - secretCode.length // Only keep the last few pressed keys in the pressed array, matching the length of the secret code.
+        );
+        // Check for SECRET CODE:
+        if (pressed.join("").includes(secretCode)) {
+          // Convert the pressed array into a string and check if it contains the secret code.
+          // Handle success:
+          console.log("DING DING!"); // If the secret code is found, log a success message and add a confetti effect.
+          cornify_add();
+        }
+        // Display pressed keys:
+        console.log(pressed); // Log the current pressed array to the console.
+      });
+
+      // ==============
+      // In essence, this code monitors key presses and checks if they match the secret code. Upon success, it displays a celebratory message and confetti.
+    </script>
+  </body>
+</html>
